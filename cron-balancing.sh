@@ -5,10 +5,7 @@ NUMBER_OF_CHILD=4
 CHILD_COMMAND="/path/to/cmd/mycmd.php"
 
 # We need pidof command to manage number of instance easily
-if [[ `which pidof | wc -l` -eq 0 ]]; then
-        echo "No pidof installed. Exiting."
-        exit
-fi
+[[ ! `which pidof | grep "not found" | wc -l` -eq 0 ]] && echo "No pidof installed. Exiting." && exit
 
 INSTANCE_COUNT=$(pidof -x $0 | wc -w)
 CHILDREN_PIDS=""
